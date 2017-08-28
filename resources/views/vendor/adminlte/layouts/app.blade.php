@@ -40,7 +40,7 @@ desired effect
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-        @include('adminlte::layouts.partials.contentheader')
+        {{-- @include('adminlte::layouts.partials.contentheader') --}}
 
         <!-- Main content -->
         <section class="content">
@@ -57,6 +57,7 @@ desired effect
 </div>
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')
+    @yield('additional-script')
 @show
 
 </body>

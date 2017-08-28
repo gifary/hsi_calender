@@ -32,5 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/data', 'OrderHistoryController@data')->name('order_history.data');
         Route::put('/update/{id}', 'OrderHistoryController@update')->name('order_history.update');
         Route::get('/delete/{id}', 'OrderHistoryController@destroy')->name('order_history.delete');
+        Route::get('download','OrderHistoryController@download')->name('order_history.download');
 	});
 });

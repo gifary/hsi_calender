@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\OrderHistory;
-use Yajra\Datatables\Facades\Datatables;
+use Yajra\Datatables\Datatables;
 
 
 /**
@@ -45,12 +45,48 @@ class OrderHistoryController extends Controller
         return $datatables
                             ->of($query)
                             ->addColumn('city_id',function($data){
-                                return $query->city->name;
+                                return $data->city->name;
                             })
-                            ->addColumn('provice_id',function($data){
-                                return $query->province->name;
+                            ->addColumn('province_id',function($data){
+                                return $data->province->name;
                             })
                             ->make(true);
+    }
+
+    public function download(){
+        $data = OrderHistory::with(["city","province"])->orderBy('created_at', 'DESC')->get();
+
+        // Define the Excel spreadsheet headers
+        $orderHisArry[] = ['NIP', 'Nama','NO WA','PROVINSI','KOTA/KAB','ALAMAT DETAIL','TOTAL ORDER','DONASI HSI'];
+
+        // Convert each member of the returned collection into an array,
+        // and append it to the payments array.
+        foreach ($data as $d) {
+            $orderHisArry[] = array(
+                'NIP'  => $d->nip,
+                'Nama'      => $d->nama,
+                'NO_WA'    => $d->no_wa,
+                'PROVINSI'     => $d->province->name,
+                'KOTA'    => $d->city->name,
+                'ALAMAT_DETAIL' => $d->alamat,
+                'TOTAL_ORDER' => $d->total_order,
+                'DONASI_HSI' => $d->donasi_hsi
+            );
+        }
+
+        // Generate and return the spreadsheet
+        \Excel::create('List_order', function($excel) use ($orderHisArry) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('List Order');
+            $excel->setCreator('gifary');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('List_confirmation', function($sheet) use ($orderHisArry) {
+                $sheet->fromArray($orderHisArry, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
     }
 
     /**

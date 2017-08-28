@@ -35,12 +35,16 @@
 					<div class="panel-body text-center">
                     	{{-- <notifications-demo></notifications-demo> --}}
                 	</div>
-		              <table id="lokasi" class="table table-bordered table-striped">
+		              <table id="order_history" class="table table-bordered table-striped">
 		                <thead>
 			                <tr>
-			                  <th>Kode</th>
-			                  <th>Lokasi</th>
-			                  <th>Aksi</th>
+			                  <th>NIP</th>
+			                  <th>Nama</th>
+			                  <th>No WA</th>
+			                  <th>Provinsi</th>
+			                  <th>Kota/Kabupaten</th>
+			                  <th>Alamat Detail</th>
+			                  <th>Email</th>
 			                </tr>
 		                </thead>
 		              </table>
@@ -61,14 +65,18 @@
 @section('additional-script')
 <script>
     $(function () {
-        $('#lokasi').DataTable({
+        $('#order_history').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '{{ route('lokasi.data') }}',
+            ajax: '{{ route('order_history.data') }}',
             columns: [
-                {data: 'kode'},
+                {data: 'nip'},
                 {data: 'nama'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'no_wa'},
+                {data: 'province_id'},
+                {data: 'city_id'},
+                {data: 'alamat'},
+                {data: 'email'},
             ]
         });
     });
