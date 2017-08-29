@@ -119,6 +119,13 @@
                             {!! $errors->first('donasi_hsi', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group {!! $errors->has('nama_kurir') ? 'has-error' : '' !!}">
+                            {!! Form::label('nama_kurir', 'Jenis Pengiriman') !!}
+                            {!! Form::select('nama_kurir',[''=>'Pilih Jenis Pengiriman'], isset($model) ? $model->nama_kurir: null , ['class'=>'form-control']) !!}
+                            {!! $errors->first('nama_kurir', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </div>
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <button class="btn button btn-block btn-success" type="button" id="confirm">Konfirmasi</button>
                     </div>
@@ -158,6 +165,7 @@
 <script src="{{ url (mix('/js/app-landing.js')) }}"></script>
 <script src="{{ url (mix('/js/all-landing.js')) }}"></script>
 <script>
+    $("#province_id").trigger("change");
     $("#province_id").on('change',function(){
         $.get('/province/get_city/' + $("#province_id").val(), function(city)
         {
@@ -168,8 +176,38 @@
             $.each(city, function(index, city) {
                 $city_id.append('<option value="' + index + '">' + city + '</option>');
             });
+            listOngkir();
         });
     });
+    $("#city_id").on('change',function(){
+        listOngkir();
+    });
+    $("#jumlah_order").on("keyup",function(){
+        listOngkir();
+    });
+
+    function listOngkir(){
+        var jumlah_order = 1;
+        console.log($("#jumlah_order").val());
+        if($("#jumlah_order").val()!=''){
+            jumlah_order= $("#jumlah_order").val();
+        }
+        $.get('/order/list_kurir/' + $("#city_id").val()+'/'+ jumlah_order, function(kurir)
+        {
+            console.log(kurir);
+            var $list_kurir = $('#nama_kurir');
+ 
+            $list_kurir.find('option').remove().end();
+            if(kurir.length > 0){
+                $.each(kurir, function(index, kurir) {
+                    $list_kurir.append('<option value="' + kurir['index'] + '">' + kurir['nama'] + '</option>');
+                });    
+            }else{
+                $list_kurir.append('<option value="0">Maaf Tidak Tersedia pengiriman silahkan hubungi admin</option>');
+            }
+            
+        });
+    }
     $('.price').priceFormat({
         prefix: '',
         centsSeparator: '.',
@@ -197,6 +235,9 @@
           form.submit();
         });
     });
+    @if(session()->exists('error'))
+        swal("Thanks!", "Maaf tidak tersedia pengiriman", "error")
+    @endif
 </script>
 </body>
 

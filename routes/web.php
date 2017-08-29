@@ -13,11 +13,18 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('fe');
+// Route::get('/tes', function () {
+//     $order_history = \App\OrderHistory::first();
+//     \Mail::to("muhammadgifary@gmail.com")
+//             ->send(new \App\Mail\OrderShipped($order_history));
+// })->name('tes');
+
 Route::get('province','ProvinceController@index')->name('province');
 Route::get('province/get_city/{id}','ProvinceController@get_city')->name('province.get_city');
 Route::get('city','CityController@index')->name('city');
 Route::get('order','OrderController@index')->name('order');
+Route::get('order/list_kurir/{city_id}/{jumlah_order}','OrderController@list_kurir')->name('order.list_kurir');
 Route::post('order','OrderController@store')->name('order');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {

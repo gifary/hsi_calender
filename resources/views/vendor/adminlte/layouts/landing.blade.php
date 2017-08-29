@@ -84,7 +84,11 @@
 
 <script src="{{ url (mix('/js/app-landing.js')) }}"></script>
 <script src="{{ url (mix('/js/all-landing.js')) }}"></script>
-
+<script type="text/javascript">
+    @if(session()->exists('status'))
+        swal("Terimakasih!", "Silakan cek email dan lakukan pembayaran", "success")
+    @endif
+</script>
 </body>
 
 </html>

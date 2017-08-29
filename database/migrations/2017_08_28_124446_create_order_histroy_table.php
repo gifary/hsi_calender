@@ -18,8 +18,8 @@ class CreateOrderHistroyTable extends Migration
             $table->integer('city_id')->unsigned();
             $table->integer('province_id')->unsigned();
             $table->string('nip',11);
-            $table->string('no_invoice',11);
-            $table->string('bukti_trf',64);
+            $table->string('no_invoice',16);
+            $table->string('bukti_trf',64)->nullable();
             $table->string('email',64);
             $table->string('nama',64);
             $table->string('no_wa',13);
@@ -27,7 +27,7 @@ class CreateOrderHistroyTable extends Migration
             $table->integer('jumlah_order');
             $table->integer('biaya_ongkir');
             $table->integer('harga_kalender');
-            $table->string('nama_kurir',16);
+            $table->string('nama_kurir',32);
             $table->integer('donasi_hsi');
             $table->integer('total');
             $table->timestamps();
