@@ -29,16 +29,16 @@ class CityController extends Controller
      */
     public function index()
     {
-        // $data = RajaOngkir::Kota()->all();
+        $data = RajaOngkir::Kota()->all();
         
-        // foreach ($data as $c) {
-        //     $city = new City;
-        //     $city->id = $c['city_id'];
-        //     $city->province_id = $c['province_id'];
-        //     $city->name = $c['city_name'];
-        //     $city->postal_code = $c['postal_code'];
-        //     $city->save();
-        // }
+        foreach ($data as $c) {
+            $city = new City;
+            $city->id = $c['city_id'];
+            $city->province_id = $c['province_id'];
+            $city->name = $c['city_name'];
+            $city->postal_code = $c['postal_code'];
+            $city->save();
+        }
         echo "done";
     }
 }

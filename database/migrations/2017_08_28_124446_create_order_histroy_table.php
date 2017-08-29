@@ -24,7 +24,10 @@ class CreateOrderHistroyTable extends Migration
             $table->string('nama',64);
             $table->string('no_wa',13);
             $table->text('alamat');
-            $table->integer('total_order');
+            $table->integer('jumlah_order');
+            $table->integer('biaya_ongkir');
+            $table->integer('harga_kalender');
+            $table->string('nama_kurir',16);
             $table->integer('donasi_hsi');
             $table->integer('total');
             $table->timestamps();

@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('province','ProvinceController@index')->name('province');
+Route::get('province/get_city/{id}','ProvinceController@get_city')->name('province.get_city');
 Route::get('city','CityController@index')->name('city');
+Route::get('order','OrderController@index')->name('order');
+Route::post('order','OrderController@store')->name('order');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
@@ -34,4 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delete/{id}', 'OrderHistoryController@destroy')->name('order_history.delete');
         Route::get('download','OrderHistoryController@download')->name('order_history.download');
 	});
+
+    Route::group(['prefix' => 'setting'], function () {
+        Route::get('/', 'SettingController@index')->name('setting');
+        Route::put('/update/{id}', 'SettingController@update')->name('setting.update');
+    });
 });

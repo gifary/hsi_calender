@@ -9,6 +9,7 @@
         "acacha/admin-lte-template-laravel": "4.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
         "maatwebsite/excel": "~2.1.0",
         "rizalafani/rajaongkirlaravel": "^1.0",
         "yajra/laravel-datatables-oracle": "^7.5"

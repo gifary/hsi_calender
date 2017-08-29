@@ -6,7 +6,7 @@
 
 window.$ = window.jQuery = require('jquery')
 
-require('./smoothscroll')
+// require('./smoothscroll')
 
 require('bootstrap-less')
 

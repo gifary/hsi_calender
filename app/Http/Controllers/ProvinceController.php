@@ -1,16 +1,12 @@
 <?php
 
-/*
- * Taken from
- * https://github.com/laravel/framework/blob/5.3/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
- */
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Province;
 use RajaOngkir;
+use App\City;
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -41,6 +37,17 @@ class ProvinceController extends Controller
         //     $provinsi->name = $p['province'];
         //     $provinsi->save();
         // }
-        echo "done";
+        $data = RajaOngkir::Cost([
+            'origin'        => 501, // id kota asal
+            'destination'   => 114, // id kota tujuan
+            'weight'        => 1700, // berat satuan gram
+            'courier'       => 'jne', // kode kurir pengantar ( jne / tiki / pos )
+        ])->get();
+        dd($data);
+    }
+
+    public function get_city($id){
+        $city = City::where("province_id",$id)->pluck("name","id");
+        return $city;
     }
 }

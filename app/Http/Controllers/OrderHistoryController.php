@@ -57,7 +57,7 @@ class OrderHistoryController extends Controller
         $data = OrderHistory::with(["city","province"])->orderBy('created_at', 'DESC')->get();
 
         // Define the Excel spreadsheet headers
-        $orderHisArry[] = ['NIP', 'Nama','NO WA','PROVINSI','KOTA/KAB','ALAMAT DETAIL','TOTAL ORDER','DONASI HSI'];
+        $orderHisArry[] = ['NIP', 'Nama','NO WA','PROVINSI','KOTA/KAB','ALAMAT DETAIL','JUMLAH ORDER','HARGA KALENDER','DONASI HSI'];
 
         // Convert each member of the returned collection into an array,
         // and append it to the payments array.
@@ -69,7 +69,8 @@ class OrderHistoryController extends Controller
                 'PROVINSI'     => $d->province->name,
                 'KOTA'    => $d->city->name,
                 'ALAMAT_DETAIL' => $d->alamat,
-                'TOTAL_ORDER' => $d->total_order,
+                'jumlah_order' => $d->jumlah_order,
+                'harga_kalender' => $d->harga_kalender,
                 'DONASI_HSI' => $d->donasi_hsi
             );
         }

@@ -14,15 +14,21 @@ const { mix } = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .js('resources/assets/js/app-landing.js', 'public/js/app-landing.js')
    .combine([
-        // 'resources/assets/js/jquery.js',
         'resources/assets/js/jquery.dataTables.js',
         'resources/assets/js/dataTables.bootstrap.min.js',
+        'resources/assets/js/sweetalert.min.js',
+        'resources/assets/js/jquery.priceformat.js'
         // 'resources/assets/js/dataTables.jqueryui.min.js',
         // 'resources/assets/js/moment.min.js',
         // 'resources/assets/js/bootstrap-datepicker.js',
         // 'resources/assets/js/select2.full.min.js',
         // 'resources/assets/js/sweetalert.min.js'
     ], 'public/js/all.js')
+   .combine([
+       'resources/assets/js/script.js',
+       'resources/assets/js/sweetalert.min.js',
+       'resources/assets/js/jquery.priceformat.js'
+    ], 'public/js/all-landing.js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .less('node_modules/bootstrap-less/bootstrap/bootstrap.less', 'public/css/bootstrap.css')
    .less('resources/assets/less/adminlte-app.less','public/css/adminlte-app.css')
@@ -40,10 +46,13 @@ mix.js('resources/assets/js/app.js', 'public/js')
     ], 'public/css/all.css')
    .combine([
        'public/css/bootstrap.css',
-       'resources/assets/css/main.css'
+       'resources/assets/css/style.css',
+       'resources/assets/css/responsive.css',
+       'resources/assets/css/sweetalert.css',
    ], 'public/css/all-landing.css')
    //APP RESOURCES
    .copy('resources/assets/img/*.*','public/img')
+   .copy('resources/assets/images/*.*','public/images')
    //VENDOR RESOURCES
    .copy('node_modules/font-awesome/fonts/*.*','public/fonts/')
    .copy('node_modules/ionicons/dist/fonts/*.*','public/fonts/')
