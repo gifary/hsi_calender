@@ -32,7 +32,7 @@
 
 <!-- Navigation
     ================================================== -->
-<div class="hero-background">
+<div class="hero-background" style="background:#000c ">
 
     <div class="container">
         <div class="header-container header">
@@ -42,6 +42,7 @@
             </a>
             <div class="header-left">
                 <a class="navbar-item" href="{{ url('/') }}">Home</a>
+                <a class="navbar-item" href="{{ url('/konfirmasi') }}">Konfirmasi</a>
             </div>
         </div>
     </div> <!--hero-container-->

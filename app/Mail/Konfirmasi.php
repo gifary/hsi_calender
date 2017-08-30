@@ -6,10 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Province;
-use App\City;
 
-class OrderShipped extends Mailable
+class Konfirmasi extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,7 +19,7 @@ class OrderShipped extends Mailable
      */
     public function __construct($order_history)
     {
-        $this->order_history =$order_history;
+        $this->order_history = $order_history;
     }
 
     /**
@@ -31,11 +29,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        $url = url('/konfirmasi/'.$this->order_history->no_invoice);
-        return $this->markdown('emails.orders.shipped')->with([
-            'city' => City::find($this->order_history->city_id),
-            'province' => Province::find($this->order_history->province_id),
-            'action_url' => $url
-        ]);
+        return $this->markdown('emails.konfirmasi.index');
     }
 }

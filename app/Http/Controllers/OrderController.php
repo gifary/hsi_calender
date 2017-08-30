@@ -45,7 +45,7 @@ class OrderController extends Controller
             'city_id' => 'required|numeric',
             'nama' => 'required|string|max:64',
             'email' => 'required|email',
-            'no_wa' => 'required|numeric',
+            'no_wa' => 'required|numeric|digits_between:10,13',
             'alamat' => 'required',
             'jumlah_order' => 'required|numeric|min:1',
             'donasi_hsi' => 'required',
@@ -88,7 +88,7 @@ class OrderController extends Controller
             $order_history->total = ((int)$request->jumlah_order * $setting->harga) + (int)$kurir[2] + (int)$donasi_hsi+17;
             $order_history->no_invoice = "HSI-".date("Y")."-".$index_urut.$no_urut;
             $order_history->save();
-            session()->flash('status', 'sukses');
+            session()->flash('status', 'Silakan cek email dan lakukan pembayaran');
 
             // $order = OrderHistory::find($order_history->id);   
 

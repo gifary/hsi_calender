@@ -11,7 +11,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\OrderHistory;
 use Yajra\Datatables\Datatables;
-
+use File;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class HomeController
@@ -50,6 +51,7 @@ class OrderHistoryController extends Controller
                             ->addColumn('province_id',function($data){
                                 return $data->province->name;
                             })
+                            ->addColumn('action', 'adminlte::action.download_bukti')
                             ->make(true);
     }
 
@@ -153,6 +155,19 @@ class OrderHistoryController extends Controller
      */
     public function destroy($id)
     {
+        
+    }
+
+    public function download_bukti_trf($file_name) {
+        //cek jik ada file
+        $exist = Storage::disk("public")->exists($file_name);
+        if($exist){
+            $file_path = storage_path('app/public/'.$file_name);
+            return response()->download($file_path);    
+        }else{
+            return response('File Not found', 200)
+                  ->header('Content-Type', 'text/plain');  
+        }
         
     }
 }

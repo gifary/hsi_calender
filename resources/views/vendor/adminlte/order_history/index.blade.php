@@ -45,6 +45,7 @@
 			                  <th>Kota/Kabupaten</th>
 			                  <th>Alamat Detail</th>
 			                  <th>Email</th>
+			                  <th></th>
 			                </tr>
 		                </thead>
 		              </table>
@@ -77,6 +78,7 @@
                 {data: 'city_id'},
                 {data: 'alamat'},
                 {data: 'email'},
+                {data: 'action', orderable: false, searchable: false}
             ]
         });
     });
